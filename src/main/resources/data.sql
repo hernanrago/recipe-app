@@ -1,0 +1,16 @@
+INSERT INTO category (description) VALUES ('American');
+INSERT INTO category (description) VALUES ('Italian');
+INSERT INTO category (description) VALUES ('Mexican');
+INSERT INTO category (description) VALUES ('Fast Food');
+INSERT INTO unit_of_measure (description) VALUES ('Unit');
+INSERT INTO unit_of_measure (description) VALUES ('Teaspoon');
+INSERT INTO unit_of_measure (description) VALUES ('Tablespoon');
+INSERT INTO unit_of_measure (description) VALUES ('Cup');
+INSERT INTO unit_of_measure (description) VALUES ('Dash');
+INSERT INTO ingredient (description) VALUES ('Avocado');
+INSERT INTO ingredient (description) VALUES ('Salt');
+INSERT INTO ingredient (description) VALUES ('Lemon Juice');
+INSERT INTO ingredient (description) VALUES ('Serrano chile');
+INSERT INTO ingredient (description) VALUES ('Cilantro');
+INSERT INTO ingredient (description) VALUES ('Black Pepper');
+INSERT INTO ingredient (description) VALUES ('TomTO');
