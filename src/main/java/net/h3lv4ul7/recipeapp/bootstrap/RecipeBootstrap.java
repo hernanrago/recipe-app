@@ -70,15 +70,15 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 				+"Chilling tomatoes hurts their flavor, so if you want to add chopped tomato to your guacamole, add it "
 				+ "just before serving.");
 		perfectGuacamole.setDifficulty(Difficulty.EASY);
-		perfectGuacamole.getIngredients().add(new Ingredient("ripe avocado", new BigDecimal(2), unitUom.get()));
-		perfectGuacamole.getIngredients().add(new Ingredient("salt", new BigDecimal(0.5), teaSpoonUom.get()));
-		perfectGuacamole.getIngredients().add(new Ingredient("fresh lime juice", new BigDecimal(1),
+		perfectGuacamole.addIngredient(new Ingredient("ripe avocado", new BigDecimal(2), unitUom.get()));
+		perfectGuacamole.addIngredient(new Ingredient("salt", new BigDecimal(0.5), teaSpoonUom.get()));
+		perfectGuacamole.addIngredient(new Ingredient("fresh lime juice", new BigDecimal(1),
 				tableSpoonUom.get()));
-		perfectGuacamole.getIngredients().add(new Ingredient("minced onion", new BigDecimal(2), tableSpoonUom.get()));
-		perfectGuacamole.getIngredients().add(new Ingredient("serrano chile", new BigDecimal(1), unitUom.get()));
-		perfectGuacamole.getIngredients().add(new Ingredient("cilantro", new BigDecimal(2), tableSpoonUom.get()));
-		perfectGuacamole.getIngredients().add(new Ingredient("grated black pepper", new BigDecimal(1), dashUom.get()));
-		perfectGuacamole.getIngredients().add(new Ingredient("ripe tomato", new BigDecimal(0.5), unitUom.get()));
+		perfectGuacamole.addIngredient(new Ingredient("minced onion", new BigDecimal(2), tableSpoonUom.get()));
+		perfectGuacamole.addIngredient(new Ingredient("serrano chile", new BigDecimal(1), unitUom.get()));
+		perfectGuacamole.addIngredient(new Ingredient("cilantro", new BigDecimal(2), tableSpoonUom.get()));
+		perfectGuacamole.addIngredient(new Ingredient("grated black pepper", new BigDecimal(1), dashUom.get()));
+		perfectGuacamole.addIngredient(new Ingredient("ripe tomato", new BigDecimal(0.5), unitUom.get()));
 
 		perfectGuacamole.getCategories().add(americanCategory.get());
 		

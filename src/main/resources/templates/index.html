@@ -3,13 +3,19 @@
 <head>
 <meta charset="UTF-8" />
 <title>Recipe Home</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}">
 
 <!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+	th:href="@{webjars/jquery/3.3.1/jquery.min.js}"></script>
 
 <!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	th:href="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.css}"></script>
 
 </head>
 
@@ -28,21 +34,14 @@
 								<thead class="thead-inverse">
 									<tr>
 										<th>Description</th>
-										<th>PrepTime</th>
-										<th>Servings</th>
-										<th>Direction</th>
-										<th>Difficulty</th>
-										<th>Ingredients</th>
+										<th>View</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr th:each="recipe : ${recipes}">
 										<td th:text="${recipe.description}" />
-										<td th:text="${recipe.prepTime}" />
-										<td th:text="${recipe.servings}" />
-										<td th:text="${recipe.direction}" />
-										<td th:text="${recipe.difficulty}" />
-										<td th:text="${recipe.ingredients}" />
+										<td><a href="#"
+											th:href="@{'/recipe/' + ${recipe.description}}">View</a></td>
 									</tr>
 								</tbody>
 							</table>

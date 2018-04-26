@@ -50,6 +50,16 @@
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>bootstrap</artifactId>
+			<version>3.3.7</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>jquery</artifactId>
+			<version>3.3.1</version>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
@@ -66,21 +76,21 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-failsafe-plugin</artifactId>
 				<configuration>
-				    <includes>
-				        <include>**/*IT.jaba</include>
-				    </includes>
-				    <additionalClasspathElements>
-				        <additionalClasspathElement>${basedir}/target/classes</additionalClasspathElement>
-				    </additionalClasspathElements>
-				    <parallel>none</parallel>
+					<includes>
+						<include>**/*IT.jaba</include>
+					</includes>
+					<additionalClasspathElements>
+						<additionalClasspathElement>${basedir}/target/classes</additionalClasspathElement>
+					</additionalClasspathElements>
+					<parallel>none</parallel>
 				</configuration>
 				<executions>
-				    <execution>
-				        <goals>
-				            <goal>integration-test</goal>
-				            <goal>verify</goal>
-				        </goals>
-				    </execution>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+					</execution>
 				</executions>
 			</plugin>
 		</plugins>
