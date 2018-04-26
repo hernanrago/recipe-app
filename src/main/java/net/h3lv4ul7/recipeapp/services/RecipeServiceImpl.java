@@ -1,13 +1,12 @@
-package guru.springframework.services;
+package net.h3lv4ul7.recipeapp.services;
 
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
-import guru.springframework.domain.Recipe;
-import guru.springframework.repositories.RecipeRepository;
+import net.h3lv4ul7.recipeapp.domain.Recipe;
+import net.h3lv4ul7.recipeapp.repositories.RecipeRepository;
 
 @Service
 public class RecipeServiceImpl implements RecipeService {

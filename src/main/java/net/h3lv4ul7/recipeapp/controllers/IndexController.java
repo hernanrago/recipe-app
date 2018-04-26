@@ -1,10 +1,10 @@
-package guru.springframework.controllers;
+package net.h3lv4ul7.recipeapp.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import guru.springframework.services.RecipeService;
+import net.h3lv4ul7.recipeapp.services.RecipeService;
 
 /**
  * Created by jt on 6/1/17.

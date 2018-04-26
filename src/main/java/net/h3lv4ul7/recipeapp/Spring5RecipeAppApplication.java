@@ -1,4 +1,4 @@
-package guru.springframework;
+package net.h3lv4ul7.recipeapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

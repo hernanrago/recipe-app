@@ -1,26 +1,21 @@
-package guru.springframework.bootstrap;
+package net.h3lv4ul7.recipeapp.bootstrap;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
-import java.util.TreeSet;
-
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
-import guru.springframework.domain.Category;
-import guru.springframework.domain.Difficulty;
-import guru.springframework.domain.Ingredient;
-import guru.springframework.domain.Recipe;
-import guru.springframework.domain.UnitOfMeasure;
-import guru.springframework.repositories.CategoryRepository;
-import guru.springframework.repositories.IngredientRepository;
-import guru.springframework.repositories.RecipeRepository;
-import guru.springframework.repositories.UnitOfMeasureRepository;
+import net.h3lv4ul7.recipeapp.domain.Category;
+import net.h3lv4ul7.recipeapp.domain.Difficulty;
+import net.h3lv4ul7.recipeapp.domain.Ingredient;
+import net.h3lv4ul7.recipeapp.domain.Recipe;
+import net.h3lv4ul7.recipeapp.domain.UnitOfMeasure;
+import net.h3lv4ul7.recipeapp.repositories.CategoryRepository;
+import net.h3lv4ul7.recipeapp.repositories.RecipeRepository;
+import net.h3lv4ul7.recipeapp.repositories.UnitOfMeasureRepository;
 
 @Component
 public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent>{
@@ -43,7 +38,6 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 		Optional<UnitOfMeasure> unitUom = unitOfMeasureRepository.findByDescription("Unit");
 		Optional<UnitOfMeasure> teaSpoonUom = unitOfMeasureRepository.findByDescription("Teaspoon");
 		Optional<UnitOfMeasure> tableSpoonUom = unitOfMeasureRepository.findByDescription("Tablespoon");
-		Optional<UnitOfMeasure> CupUom = unitOfMeasureRepository.findByDescription("Cup");
 		Optional<UnitOfMeasure> dashUom = unitOfMeasureRepository.findByDescription("Dash");
 
 		Optional<Category> americanCategory = categoryRepository.findByDescription("Mexican");

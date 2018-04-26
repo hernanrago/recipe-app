@@ -1,10 +1,9 @@
-package guru.springframework.domain;
+package net.h3lv4ul7.recipeapp.domain;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -30,7 +29,8 @@ public class Recipe {
 	private Integer cookTime;
 	private Integer servings;
 	private String url;
-	@Column(length=3000)
+	
+	@Lob
 	private String direction;
 
 	@Enumerated(EnumType.STRING)

@@ -1,8 +1,8 @@
-package guru.springframework.services;
+package net.h3lv4ul7.recipeapp.services;
 
 import java.util.Set;
 
-import guru.springframework.domain.Recipe;
+import net.h3lv4ul7.recipeapp.domain.Recipe;
 
 public interface RecipeService{
 	
