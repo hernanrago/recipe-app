@@ -40,8 +40,14 @@
 								<tbody>
 									<tr th:each="recipe : ${recipes}">
 										<td th:text="${recipe.description}" />
-										<td><a href="#"
-											th:href="@{'/recipe/' + ${recipe.description}}">View</a></td>
+										<td>
+										    <a href="#"
+										       th:href="@{'/recipe/' + ${recipe.description}}">View</a>
+								        </td>
+										<td>
+										    <a href="#"
+										       th:href="@{'/update/' + ${recipe.description}}">Update</a>
+										</td>
 									</tr>
 								</tbody>
 							</table>
