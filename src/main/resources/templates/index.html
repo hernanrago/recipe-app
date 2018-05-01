@@ -34,11 +34,11 @@
 								<thead class="thead-inverse">
 									<tr>
 										<th>Description</th>
-										<th>View</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr th:each="recipe : ${recipes}">
+									    <td th:remove="all">Any recipe</td>
 										<td th:text="${recipe.description}" />
 										<td>
 										    <a href="#"
@@ -48,6 +48,10 @@
 										    <a href="#"
 										       th:href="@{'/update/' + ${recipe.description}}">Update</a>
 										</td>
+										<td>
+                                            <a href="#"
+                                               th:href="@{'/delete/' + ${recipe.description}}">Delete</a>
+                                        </td>
 									</tr>
 								</tbody>
 							</table>

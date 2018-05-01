@@ -19,4 +19,7 @@ public interface RecipeService{
 	
 	RecipeCommand findCommandByDescription(String description);
 
+	void deleteRecipeByDescription(String description);
+
+	
 }

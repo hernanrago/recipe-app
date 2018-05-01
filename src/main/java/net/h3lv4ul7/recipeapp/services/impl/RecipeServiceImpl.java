@@ -1,4 +1,4 @@
-package net.h3lv4ul7.recipeapp.services;
+package net.h3lv4ul7.recipeapp.services.impl;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -13,6 +13,7 @@ import net.h3lv4ul7.recipeapp.converters.RecipeCommandToRecipe;
 import net.h3lv4ul7.recipeapp.converters.RecipeToRecipeCommand;
 import net.h3lv4ul7.recipeapp.domain.Recipe;
 import net.h3lv4ul7.recipeapp.repositories.RecipeRepository;
+import net.h3lv4ul7.recipeapp.services.RecipeService;
 
 @Service
 public class RecipeServiceImpl implements RecipeService {
@@ -79,5 +80,10 @@ public class RecipeServiceImpl implements RecipeService {
 	public RecipeCommand findCommandByDescription(String description) {
 
 		return recipeToRecipeCommand.convert(getRecipeByDescription(description));
+	}
+
+	@Override
+	public void deleteRecipeByDescription(String description) {
+		recipeRepository.delete(getRecipeByDescription(description));
 	}
 }
