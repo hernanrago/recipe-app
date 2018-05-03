@@ -11,5 +11,4 @@ import net.h3lv4ul7.recipeapp.domain.Category;
 public interface CategoryRepository extends CrudRepository<Category, Long>{
 	
 	Optional<Category> findByDescription(String description);
-
 }

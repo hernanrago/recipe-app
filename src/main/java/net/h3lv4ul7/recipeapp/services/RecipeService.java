@@ -7,19 +7,13 @@ import net.h3lv4ul7.recipeapp.domain.Recipe;
 
 public interface RecipeService{
 	
-	Recipe getRecipeById(Long id);
+	void deleteById(Long id);
 	
-	Recipe getRecipeByDescription(String description);
-	
-	Set<Recipe> getRecipes();
-	
-	RecipeCommand saveRecipeCommand(RecipeCommand command);
+	Recipe findById(Long id);
 
 	RecipeCommand findCommandById(Long id);
 	
-	RecipeCommand findCommandByDescription(String description);
-
-	void deleteRecipeByDescription(String description);
-
+	RecipeCommand saveRecipeCommand(RecipeCommand command);
 	
+	Set<Recipe> getRecipes();
 }

@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
+import lombok.extern.slf4j.Slf4j;
 import net.h3lv4ul7.recipeapp.commands.RecipeCommand;
 import net.h3lv4ul7.recipeapp.converters.RecipeCommandToRecipe;
 import net.h3lv4ul7.recipeapp.converters.RecipeToRecipeCommand;
@@ -15,6 +16,7 @@ import net.h3lv4ul7.recipeapp.domain.Recipe;
 import net.h3lv4ul7.recipeapp.repositories.RecipeRepository;
 import net.h3lv4ul7.recipeapp.services.RecipeService;
 
+@Slf4j
 @Service
 public class RecipeServiceImpl implements RecipeService {
 
@@ -24,66 +26,56 @@ public class RecipeServiceImpl implements RecipeService {
 
 	public RecipeServiceImpl(RecipeRepository recipeRepository, RecipeToRecipeCommand recipeToRecipeCommand,
 			RecipeCommandToRecipe recipeCommandToRecipe) {
-		super();
 		this.recipeRepository = recipeRepository;
 		this.recipeToRecipeCommand = recipeToRecipeCommand;
 		this.recipeCommandToRecipe = recipeCommandToRecipe;
 	}
 
 	@Override
-	public Set<Recipe> getRecipes() {
-		Set<Recipe> recipes = new HashSet<>();
-		recipeRepository.findAll().forEach(recipes::add);
-		return recipes;
+	public void deleteById(Long id) {
+		log.debug("Calling RecipeServiceImpl.deleteById method\nParams: "+id);
+		
+		recipeRepository.deleteById(id);
 	}
 
 	@Override
-	public Recipe getRecipeById(Long id) {
-
-		Optional<Recipe> recipeOptional = recipeRepository.findById(id);
-
-		if (!recipeOptional.isPresent())
-			throw new RuntimeException("Recipe not found");
-
-		return recipeOptional.get();
-
-	}
-
-	@Override
-	public Recipe getRecipeByDescription(String description) {
-
-		Optional<Recipe> recipeOptional = recipeRepository.findByDescription(description);
-
-		if (!recipeOptional.isPresent())
-			throw new RuntimeException("Recipe not found");
-
-		return recipeOptional.get();
-
-	}
-
-	@Override
-	@Transactional
-	public RecipeCommand saveRecipeCommand(RecipeCommand command) {
-		Recipe recipe = recipeCommandToRecipe.convert(command);
-		Recipe savedRecipe = recipeRepository.save(recipe);
-		return recipeToRecipeCommand.convert(savedRecipe);
+	public Recipe findById(Long id) {
+		log.debug("Calling RecipeServiceImpl.findById method\nParams: "+id);
+		
+		Optional<Recipe> optional = recipeRepository.findById(id);
+		
+		if(!optional.isPresent()) throw new RuntimeException("Recipe with id "+ id + "not found.");
+		
+		return optional.get();
 	}
 
 	@Override
 	@Transactional
 	public RecipeCommand findCommandById(Long id) {
+		log.debug("Calling RecipeServiceImpl.findCommandById method\nParams: "+id);
 		
-		return recipeToRecipeCommand.convert(getRecipeById(id));
+		return recipeToRecipeCommand.convert(findById(id));
 	}
 
 	@Override
-	public RecipeCommand findCommandByDescription(String description) {
+	@Transactional
+	public RecipeCommand saveRecipeCommand(RecipeCommand command) {
+		log.debug("Calling RecipeServiceImpl.saveRecipeCommand method\nParams: "+command);
 
-		return recipeToRecipeCommand.convert(getRecipeByDescription(description));
+		return recipeToRecipeCommand
+				.convert(recipeRepository.save(recipeCommandToRecipe.convert(command)));
 	}
 
 	@Override
-	public void deleteRecipeByDescription(String description) {
-		recipeRepository.delete(getRecipeByDescription(description));
+	public Set<Recipe> getRecipes() {
+		log.debug("Calling RecipeServiceImpl.saveRecipeCommand method.");
+
+		Set<Recipe> recipes = new HashSet<>();
+		
+		recipeRepository.findAll().iterator().forEachRemaining(recipes::add);
+		
+		return recipes;
 	}
+	
+	
 }

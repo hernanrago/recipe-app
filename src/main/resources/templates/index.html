@@ -1,22 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8" />
-<title>Recipe Home</title>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}">
-
-<!-- jQuery library -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"
-	th:href="@{webjars/jquery/3.3.1/jquery.min.js}"></script>
-
-<!-- Latest compiled JavaScript -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-	th:href="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.css}"></script>
-
+	<meta charset="UTF-8" />
+	<title>Recipe Home</title>
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+		th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
+	
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+		th:href="@{webjars/jquery/3.3.1/jquery.min.js}">
+	</script>
+	
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+		th:href="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.css}">
+	</script>
 </head>
 
 <body>
@@ -29,7 +28,7 @@
 					</div>
 					<div class="panel-body">
 						<div class="table-responsive"
-							th:if="${not #lists.isEmpty(recipes)}">
+						     th:if="${not #lists.isEmpty(recipes)}">
 							<table class="table table-hover">
 								<thead class="thead-inverse">
 									<tr>
@@ -38,19 +37,18 @@
 								</thead>
 								<tbody>
 									<tr th:each="recipe : ${recipes}">
-									    <td th:remove="all">Any recipe</td>
 										<td th:text="${recipe.description}" />
 										<td>
 										    <a href="#"
-										       th:href="@{'/recipe/' + ${recipe.description}}">View</a>
+										       th:href="@{'/recipe/' + ${recipe.id} + '/show'}">View</a>
 								        </td>
 										<td>
 										    <a href="#"
-										       th:href="@{'/update/' + ${recipe.description}}">Update</a>
+										       th:href="@{'/recipe/' + ${recipe.id} + '/update'}">Update</a>
 										</td>
 										<td>
                                             <a href="#"
-                                               th:href="@{'/delete/' + ${recipe.description}}">Delete</a>
+                                               th:href="@{'/delete/' + ${recipe.id}}">Delete</a>
                                         </td>
 									</tr>
 								</tbody>

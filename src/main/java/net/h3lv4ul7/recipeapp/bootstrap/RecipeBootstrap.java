@@ -4,6 +4,9 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import javax.transaction.Transactional;
+
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
@@ -31,8 +34,17 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 		this.unitOfMeasureRepository = unitOfMeasureRepository;
 	}
 	
-	private List<Recipe> getRecipes(){
-		
+	@Override
+	@Transactional
+	public void onApplicationEvent(ContextRefreshedEvent event) {
+		initData();
+	}
+
+	private void initData() {	
+		recipeRepository.saveAll(getRecipes());
+	}
+	
+	private List<Recipe> getRecipes(){	
 		List<Recipe> recipes = new ArrayList<>();
 		
 		Optional<UnitOfMeasure> unitUom = unitOfMeasureRepository.findByDescription("Unit");
@@ -40,13 +52,15 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 		Optional<UnitOfMeasure> tableSpoonUom = unitOfMeasureRepository.findByDescription("Tablespoon");
 		Optional<UnitOfMeasure> dashUom = unitOfMeasureRepository.findByDescription("Dash");
 
-		Optional<Category> americanCategory = categoryRepository.findByDescription("Mexican");
+		Optional<Category> mexicanCategory = categoryRepository.findByDescription("Mexican");
 		
 		Recipe perfectGuacamole = new Recipe();
+		
 		perfectGuacamole.setDescription("Perfect Guacamole");
 		perfectGuacamole.setPrepTime(10);
 		perfectGuacamole.setCookTime(0);
 		perfectGuacamole.setServings(4);
+		perfectGuacamole.setUrl("https://www.simplyrecipes.com/recipes/perfect_guacamole/");
 		perfectGuacamole.setDirection(
 				"1. Cut avocado, remove flesh: Cut the avocados in half. Remove seed. Score the inside of the avocado "
 				+ "with a blunt knife and scoop out the flesh with a spoon. (See How to Cut and Peel an Avocado.) Place"
@@ -80,26 +94,11 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 		perfectGuacamole.addIngredient(new Ingredient("grated black pepper", new BigDecimal(1), dashUom.get()));
 		perfectGuacamole.addIngredient(new Ingredient("ripe tomato", new BigDecimal(0.5), unitUom.get()));
 
-		perfectGuacamole.getCategories().add(americanCategory.get());
+		perfectGuacamole.getCategories().add(mexicanCategory.get());
 		
 		recipes.add(perfectGuacamole);
 		
 		return recipes;
-
 	}
-	
-
-	@Override
-	public void onApplicationEvent(ContextRefreshedEvent event) {
-		initData();
-		
-	}
-
-	private void initData() {
-		
-		recipeRepository.saveAll(getRecipes());
-	}
-	
-	
 
 }
