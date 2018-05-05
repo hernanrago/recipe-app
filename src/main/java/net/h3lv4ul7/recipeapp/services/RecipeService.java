@@ -9,7 +9,7 @@ public interface RecipeService{
 	
 	void deleteById(Long id);
 	
-	Recipe findById(Long id);
+	Recipe findRecipeById(Long id);
 
 	RecipeCommand findCommandById(Long id);
 	

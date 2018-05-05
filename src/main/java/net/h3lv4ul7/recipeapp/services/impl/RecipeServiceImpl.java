@@ -39,8 +39,8 @@ public class RecipeServiceImpl implements RecipeService {
 	}
 
 	@Override
-	public Recipe findById(Long id) {
-		log.debug("Calling RecipeServiceImpl.findById method\nParams: "+id);
+	public Recipe findRecipeById(Long id) {
+		log.debug("Calling RecipeServiceImpl.findRecipeById method\nParams: "+id);
 		
 		Optional<Recipe> optional = recipeRepository.findById(id);
 		
@@ -54,7 +54,7 @@ public class RecipeServiceImpl implements RecipeService {
 	public RecipeCommand findCommandById(Long id) {
 		log.debug("Calling RecipeServiceImpl.findCommandById method\nParams: "+id);
 		
-		return recipeToRecipeCommand.convert(findById(id));
+		return recipeToRecipeCommand.convert(findRecipeById(id));
 	}
 
 	@Override
