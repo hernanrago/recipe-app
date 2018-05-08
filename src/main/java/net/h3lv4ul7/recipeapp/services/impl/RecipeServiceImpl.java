@@ -13,6 +13,7 @@ import net.h3lv4ul7.recipeapp.commands.RecipeCommand;
 import net.h3lv4ul7.recipeapp.converters.RecipeCommandToRecipe;
 import net.h3lv4ul7.recipeapp.converters.RecipeToRecipeCommand;
 import net.h3lv4ul7.recipeapp.domain.Recipe;
+import net.h3lv4ul7.recipeapp.exceptions.NotFoundException;
 import net.h3lv4ul7.recipeapp.repositories.RecipeRepository;
 import net.h3lv4ul7.recipeapp.services.RecipeService;
 
@@ -44,7 +45,7 @@ public class RecipeServiceImpl implements RecipeService {
 		
 		Optional<Recipe> optional = recipeRepository.findById(id);
 		
-		if(!optional.isPresent()) throw new RuntimeException("Recipe with id "+ id + "not found.");
+		if(!optional.isPresent()) throw new NotFoundException("Recipe with id "+ id + " not found.");
 		
 		return optional.get();
 	}
