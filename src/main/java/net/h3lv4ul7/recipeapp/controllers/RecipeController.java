@@ -1,17 +1,14 @@
 package net.h3lv4ul7.recipeapp.controllers;
 
-import org.springframework.http.HttpStatus;
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.servlet.ModelAndView;
-
-import javassist.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import net.h3lv4ul7.recipeapp.commands.RecipeCommand;
 import net.h3lv4ul7.recipeapp.services.RecipeService;
@@ -21,6 +18,8 @@ import net.h3lv4ul7.recipeapp.services.RecipeService;
 public class RecipeController {
 
 	private final RecipeService recipeService;
+	
+	private static final String RECIPE_RECIPEFORM_URL = "recipe/recipeform";
 
 	public RecipeController(RecipeService recipeService) {
 		this.recipeService = recipeService;
@@ -35,17 +34,12 @@ public class RecipeController {
 		return "redirect:/";
 	}
 
-	@ResponseStatus(HttpStatus.NOT_FOUND)
-	@ExceptionHandler(NotFoundException.class)
-	public String handleNotFound() {
-		log.error("Handling not found exception");
-
-		return "404error";
-	}
-
 	@PostMapping("/recipe")
-	public String saveOrUpdate(@ModelAttribute RecipeCommand command) {
-		log.debug("Calling RecipeController.saveOrUpdate method.\nParams: " + command);
+	public String saveOrUpdate(@Valid @ModelAttribute("recipe") RecipeCommand command, BindingResult bindingResult) {
+		if(bindingResult.hasErrors()) {
+			bindingResult.getAllErrors().forEach(objectError -> log.error(objectError.toString()));
+			return RECIPE_RECIPEFORM_URL;
+		}
 
 		RecipeCommand savedCommand = recipeService.saveRecipeCommand(command);
 
@@ -54,16 +48,16 @@ public class RecipeController {
 
 	@GetMapping("/recipe/new")
 	public String showNewRecipeForm(Model model) {
-		log.debug("Calling RecipeController.newRecipe method.\nParams: " + model);
+		log.debug("Calling newRecipe method. Params: " + model);
 
 		model.addAttribute("recipe", new RecipeCommand());
 
-		return "/recipe/recipeform";
+		return RECIPE_RECIPEFORM_URL;
 	}
 
 	@GetMapping("/recipe/{id}/show")
 	public String showRecipe(@PathVariable String id, Model model) {
-		log.debug("Calling RecipeController.showRecipe method.\nParams: " + id + " " + model);
+		log.debug("Calling showRecipe method. Params: " + id + " " + model);
 
 		model.addAttribute("recipe", recipeService.findRecipeById(Long.valueOf(id)));
 
@@ -76,7 +70,7 @@ public class RecipeController {
 
 		model.addAttribute("recipe", recipeService.findCommandById(Long.valueOf(id)));
 
-		return "/recipe/recipeform";
+		return RECIPE_RECIPEFORM_URL;
 	}
 
 }
